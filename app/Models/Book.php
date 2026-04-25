@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Review;
 use App\Models\ReadingList;
 
 class Book extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'google_books_id',
         'title',
