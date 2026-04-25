@@ -13,14 +13,20 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Nombre y Apellido')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        </div>
+
+        <div>
+            <x-input-label for="username" :value="__('Nombre de Usuario')" />
+            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)" required autocomplete="username" />
+            <x-input-error class="mt-2" :messages="$errors->get('username')" />
         </div>
 
         <div>
@@ -45,6 +51,32 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div>
+            <x-input-label for="bio" :value="__('Biografía')" />
+            {{-- <x-text-input id="bio" name="bio" type="text/area" class="mt-1 block w-full" :value="old('bio', $user->bio)" autocomplete="bio" /> --}}
+            <textarea id="bio" name="bio" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" autocomplete="bio">{{ old('bio', $user->bio) }}</textarea>
+            <x-input-error class="mt-2" :messages="$errors->get('bio')" />
+
+        </div>
+
+        <div>
+            <x-input-label for="avatar" :value="__('Foto de Perfil')" />
+
+            {{-- Mostrar avatar actual si existe --}}
+            @if ($user->avatar)
+                <div class="mb-4">
+                    <img src="{{ Storage::url($user->avatar) }}" alt="Avatar" class="w-20 h-20 rounded-full mb-2">
+                </div>
+            @else
+                <div class="w-20 h-20 rounded-full bg-gray-200 mb-2 flex items-center justify-center">
+                    <span class="text-gray-500 text-xl">{{ substr($user->name, 0, 1) }}</span>
+                </div>
+            @endif
+
+            {{-- Input para subir nueva foto de perfil --}}
+            <input type="file" name="avatar" id="avatar" accept="image/*">
         </div>
 
         <div class="flex items-center gap-4">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,10 +27,22 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $request->user()->fill(collect($request->validated())->except('avatar')->toArray());
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
+        }
+
+        // Handle avatar upload if a new file is provided
+        if ($request->hasFile('avatar')) {
+            // Delete the old avatar if it exists
+            if ($request->user()->avatar) {
+                Storage::disk('public')->delete($request->user()->avatar);
+            }
+
+            // Store the new avatar and update the user's avatar path
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $request->user()->avatar = $path;
         }
 
         $request->user()->save();
