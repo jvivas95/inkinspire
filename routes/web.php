@@ -18,10 +18,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/test-books', function () {
-    $service = new \App\Services\GoogleBooksService();
-    $results = $service->search('Harry Potter');
-    dd($results);
-});
+// Route::get('/test-books', function () {
+//     $service = new \App\Services\GoogleBooksService();
+//     $results = $service->search('Harry Potter');
+//     dd($results);
+// });
+
+// Route::get('/test-book/{id}', function ($id) {
+//     $service = new \App\Services\GoogleBooksService();
+//     $results = $service->getById($id);
+//     dd($results);
+// });
 
 require __DIR__.'/auth.php';
