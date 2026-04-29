@@ -3,16 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\GoogleBooksService;
+use App\Models\Book;
 
 class BookController extends Controller
 {
+    protected $googleBooks;
+
+    public function __construct(GoogleBooksService $googleBooks)
+    {
+        $this->googleBooks = $googleBooks;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+
+        if ($request->has('q')){
+            $value = $request->input('q');
+            $books = $this->googleBooks->search($value);
+        }
+        else {
+            $books = Book::paginate(12);
+        }
+
+        return view('books.index', compact('books'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -28,6 +50,18 @@ class BookController extends Controller
     public function store(Request $request)
     {
         //
+        $googleBooksId = $request->input('google_books_id');
+        $result = Book::where('google_books_id', $googleBooksId)->first();
+        if ( $result == null ){
+            $booksValues = $this->googleBooks->getById($googleBooksId);
+            $book = Book::create($booksValues);
+
+            return redirect()->route('books.show', $book->id);
+        }
+
+        else {
+            return redirect()->route('books.show', $result->id);
+        }
     }
 
     /**
@@ -36,6 +70,8 @@ class BookController extends Controller
     public function show(string $id)
     {
         //
+        $book = Book::findOrFail($id);
+        return view('books.show', compact('book'));
     }
 
     /**
