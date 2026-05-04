@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
+use App\Models\Review;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,6 +21,7 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
     Route::resource('books', BookController::class);
+    Route::resource('reviews', ReviewController::class)->only(['store', 'edit', 'update', 'destroy']);
 });
 
 
