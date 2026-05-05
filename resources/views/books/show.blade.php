@@ -39,8 +39,13 @@
                     <p class="font-bold">Descripción:</p>
                     <p class="">{{ data_get($book, 'description') }}</p>
                 </div>
+                <div class="flex gap-2">
                 <p class="font-bold">Puntuación Promedio:</p>
-                <p>{{ data_get($book, 'average_rating') }}</p>
+                    {{-- <div class="star-rating">
+                        <x-star-rating name="average" :rating="$book->average_rating" />
+                    </div> --}}
+                    <p class="ml-2">({{ (int)$book->ratings_count }})</p>
+                </div>
             </div>
         </div>
 
@@ -72,13 +77,7 @@
                                     <textarea id="body" name="body" autocomplete="body">{{ data_get($userReview, 'body') }}</textarea>
                                     <x-input-error :messages="$errors->get('body')" class="mt-2" />
                                 </div>
-                                <div class="star-rating">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        <input type="radio" id="editStar{{ $i }}" name="rating" value="{{ $i }}"
-                                        @if($i == $userReview->rating) checked @endif />
-                                        <label for="star{{ $i }}" title="{{ $i }} estrellas">★</label>
-                                    @endfor
-                                </div>
+                                <x-star-rating name="rating" :rating="$userReview->rating" />
                                 <button class="mt-2 px-4 py-2 bg-green-500 text-white rounded" type="submit">Guardar</button>
                             </form>
                         </div>
@@ -103,12 +102,7 @@
                     <textarea id="body" name="body" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" rows="4" required></textarea>
                     <x-input-error :messages="$errors->get('body')" class="mt-2" />
                 </div>
-                <div class="star-rating">
-                    @for ($i = 1; $i <= 5; $i++)
-                        <input type="radio" id="star{{ $i }}" name="rating" value="{{ $i }}" />
-                        <label for="star{{ $i }}" title="{{ $i }} estrellas">★</label>
-                    @endfor
-                </div>
+                <x-star-rating name="rating" :rating="0" />
                 <button class="mt-2 px-4 py-2 bg-green-500 text-white rounded" type="submit">Enviar Reseña</button>
             </form>
             @endif
