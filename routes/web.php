@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReadingListController;
 use App\Http\Controllers\ReviewController;
+use App\Models\ReadingList;
 use App\Models\Review;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +24,8 @@ Route::middleware('auth')->group(function () {
     })->middleware(['auth', 'verified'])->name('dashboard');
     Route::resource('books', BookController::class);
     Route::resource('reviews', ReviewController::class)->only(['store', 'edit', 'update', 'destroy']);
+    Route::post('reading-list', [ReadingListController::class, 'store'])->name('reading-list.store');
+    Route::delete('reading-list/{readingList}', [ReadingListController::class, 'destroy'])->name('reading-list.destroy');
 });
 
 
