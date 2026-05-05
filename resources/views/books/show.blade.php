@@ -43,9 +43,76 @@
                 <p>{{ data_get($book, 'average_rating') }}</p>
             </div>
         </div>
-        {{-- Footer section --}}
-        <div>
 
+        {{-- Review section --}}
+        <div>
+            @if ($userReview)
+            <div>
+                <p>{{ $userReview->user->name }}</p>
+                <p>Publicado: {{ $userReview->updated_at->diffForHumans(['short' => true]) }}</p>
+                <p>{{ data_get($userReview, 'body') }}</p>
+                <div class="flex">
+                    <button class="mt-2 px-4 py-2 bg-yellow-500 text-white rounded" onclick="document.getElementById('editModal').classList.remove('hidden')">
+                        Editar
+                    </button>
+                    {{-- Edit Modal --}}
+                    <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div class="bg-white rounded-lg p-6 w-full max-w-lg">
+                            {{-- Button to close --}}
+                            <button onclick="document.getElementById('editModal').classList.add('hidden')">
+                                ✕
+                            </button>
+                            <h2>Editar reseña</h2>
+                            {{-- Edit form --}}
+                            <form method="POST" action="{{ route('reviews.update', $userReview->id) }}">
+                                @csrf
+                                @method('PUT')
+                                <div>
+                                    {{-- <x-input-label for="body" :value=""></x-input-label> --}}
+                                    <textarea id="body" name="body" autocomplete="body">{{ data_get($userReview, 'body') }}</textarea>
+                                    <x-input-error :messages="$errors->get('body')" class="mt-2" />
+                                </div>
+                                <div class="star-rating">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <input type="radio" id="editStar{{ $i }}" name="rating" value="{{ $i }}"
+                                        @if($i == $userReview->rating) checked @endif />
+                                        <label for="star{{ $i }}" title="{{ $i }} estrellas">★</label>
+                                    @endfor
+                                </div>
+                                <button class="mt-2 px-4 py-2 bg-green-500 text-white rounded" type="submit">Guardar</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    {{-- Delete review --}}
+                    <form method="POST" action="{{ route('reviews.destroy', $userReview->id) }}" class="flex justify-center gap-2 mt-4">
+                        @csrf
+                        @method('DELETE')
+                        <button class="mt-2 px-4 py-2 bg-red-500 text-white rounded" type="submit"> Eliminar </button>
+                    </form>
+                </div>
+            </div>
+
+            @else
+            <form method="POST" action="{{ route('reviews.store') }}">
+                @csrf
+                <input type="hidden" name="book_id" value="{{ $book->id }}">
+                {{-- Body review --}}
+                <div>
+                    <x-input-label for="body" :value="__('Escribe tu reseña')" />
+                    <textarea id="body" name="body" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" rows="4" required></textarea>
+                    <x-input-error :messages="$errors->get('body')" class="mt-2" />
+                </div>
+                <div class="star-rating">
+                    @for ($i = 1; $i <= 5; $i++)
+                        <input type="radio" id="star{{ $i }}" name="rating" value="{{ $i }}" />
+                        <label for="star{{ $i }}" title="{{ $i }} estrellas">★</label>
+                    @endfor
+                </div>
+                <button class="mt-2 px-4 py-2 bg-green-500 text-white rounded" type="submit">Enviar Reseña</button>
+            </form>
+            @endif
         </div>
+
     </div>
 </x-app-layout>

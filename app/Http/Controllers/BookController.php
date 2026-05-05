@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\GoogleBooksService;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
+
 
 class BookController extends Controller
 {
@@ -71,7 +73,8 @@ class BookController extends Controller
     {
         //
         $book = Book::findOrFail($id);
-        return view('books.show', compact('book'));
+        $userReview = optional(Auth::user())->reviews()->where('book_id', $id)->first();
+        return view('books.show', compact('book', 'userReview'));
     }
 
     /**

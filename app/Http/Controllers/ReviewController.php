@@ -91,7 +91,6 @@ class ReviewController extends Controller
         $request->validate([
             'body' => 'required|string|min:20|max:2000',
             'rating' => 'required|integer|min:1|max:5',
-            'book_id' => 'required|exists:books,id',
         ]);
 
         $review->update([
@@ -99,7 +98,7 @@ class ReviewController extends Controller
             'rating' => $request->input('rating'),
         ]);
 
-        return redirect()->route('books.show', $request->input('book_id'))->with('success', 'Reseña actualizada exitosamente.');
+        return redirect()->route('books.show', $review->book_id)->with('success', 'Reseña actualizada exitosamente.');
     }
 
     /**
