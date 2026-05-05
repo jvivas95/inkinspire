@@ -41,9 +41,7 @@
                 </div>
                 <div class="flex gap-2">
                 <p class="font-bold">Puntuación Promedio:</p>
-                    {{-- <div class="star-rating">
-                        <x-star-rating name="average" :rating="$book->average_rating" />
-                    </div> --}}
+                    <x-star-display :rating="data_get($book, 'average_rating' ?? 0)"></x-star-display>
                     <p class="ml-2">({{ (int)$book->ratings_count }})</p>
                 </div>
             </div>

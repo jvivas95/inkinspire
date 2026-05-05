@@ -13,7 +13,7 @@ class ReviewObserver
     {
         //
         $book = $review->book;
-        $book->average_rating = $book->reviews()->avg('rating');
+        $book->average_rating = $book->reviews()->avg('rating') ?? 0;
         $book->ratings_count = $book->reviews()->count();
         $book->save();
     }
@@ -25,7 +25,7 @@ class ReviewObserver
     {
         //
         $book = $review->book;
-        $book->average_rating = $book->reviews()->avg('rating');
+        $book->average_rating = $book->reviews()->avg('rating') ?? 0;
         $book->ratings_count = $book->reviews()->count();
         $book->save();
     }
@@ -37,7 +37,7 @@ class ReviewObserver
     {
         //
         $book = $review->book;
-        $book->average_rating = $book->reviews()->avg('rating');
+        $book->average_rating = $book->reviews()->avg('rating') ?? 0;
         $book->ratings_count = $book->reviews()->count();
         $book->save();
     }
