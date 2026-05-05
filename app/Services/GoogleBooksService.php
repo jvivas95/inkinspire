@@ -33,7 +33,8 @@ class GoogleBooksService
             })->toArray();
         } else {
             // Handle error response
-            throw new Exception('Failed to fetch data from Google Books API');
+            // throw new Exception('Failed to fetch data from Google Books API');
+            return [];
         }
     }
 

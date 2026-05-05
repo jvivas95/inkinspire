@@ -25,15 +25,36 @@ class BookController extends Controller
     {
         //
 
-        if ($request->has('q')){
+        if ($request->filled('q')){
             $value = $request->input('q');
             $books = $this->googleBooks->search($value);
         }
         else {
-            $books = Book::paginate(12);
-        }
+            $query = Book::query();
 
-        return view('books.index', compact('books'));
+            if ($request->input('genre')) {
+                $query->where('genre', $request->input('genre'));
+            }
+
+            switch ($request->input('sort')) {
+                case 'rating':
+                    $query->orderBy('average_rating', 'desc');
+                    break;
+                case 'reviews':
+                    $query->orderBy('ratings_count', 'desc');
+                    break;
+                default:
+                    $query->orderBy('created_at', 'desc');
+                    break;
+            }
+
+            $books = $query->paginate(12);
+
+            }
+
+        $genres = Book::whereNotNull('genre')->distinct()->pluck('genre');
+
+        return view('books.index', compact('books', 'genres'));
     }
 
 
