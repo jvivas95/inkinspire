@@ -1,0 +1,23 @@
+<svg width="40" height="123" xmlns="http://www.w3.org/2000/svg" role="img">
+ <title>InkInspire logo v3</title>
+
+ <!-- Pluma minimalista: un solo trazo elegante -->
+ <!-- Cuerpo de la pluma -->
+ <!-- Ala izquierda de la pluma -->
+ <!-- Ala derecha de la pluma -->
+ <!-- Punta de la pluma -->
+ <!-- Gota de tinta -->
+ <!-- Brillo gota -->
+ <!-- Línea decorativa dorada -->
+ <!-- Texto principal -->
+ <!-- Subtítulo -->
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" stroke-linecap="round" fill="none" stroke-width="2px" stroke="rgb(15, 23, 42)" d="m14.23529,0q25,25 15,90"/>
+  <path id="svg_2" stroke-width="1px" opacity="0.9" fill="rgb(6, 78, 59)" d="m14.23529,0q-22,35 -10,70q10,-20 25,20"/>
+  <path id="svg_3" stroke-width="1px" opacity="0.85" fill="rgb(15, 23, 42)" d="m14.23529,0q28,30 25,65q-5,-15 -10,25"/>
+  <path id="svg_4" stroke-width="1px" fill="rgb(15, 23, 42)" d="m27.23529,88l2,14l3,-14l-5,0z"/>
+  <path id="svg_5" stroke-width="1px" fill="rgb(212, 175, 55)" d="m29.23529,108q-3,10 0,15q3,-5 0,-15z"/>
+  <ellipse id="svg_6" stroke-width="1px" opacity="0.5" fill="rgb(253, 252, 248)" ry="2" rx="1" cy="113" cx="27.73529"/>
+ </g>
+</svg>

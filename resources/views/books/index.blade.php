@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        Books - {{ config('app.name', 'InkInspire') }}
+    </x-slot>
     <form method="GET" action="{{ route('books.index') }}">
         <div>
             <x-input-label for="search" :value="__('Search')" />

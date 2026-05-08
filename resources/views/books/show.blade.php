@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="title">
+        {{ data_get($book, 'title') }} - {{ config('app.name', 'InkInspire') }}
+    </x-slot>
     {{-- Container --}}
     <div class="w-auto h-auto p-4 justify-center mx-auto content-center border border-solid-gray-300 rounded">
         {{-- Title --}}

@@ -1,0 +1,27 @@
+<svg width="100%" viewBox="0 0 680 180" role="img" style="background:#FDFCF8;" xmlns="http://www.w3.org/2000/svg">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">InkInspire logo v3</title>
+
+  
+
+  <!-- Pluma minimalista: un solo trazo elegante -->
+  <!-- Cuerpo de la pluma -->
+  <path d="M90 30 Q115 55 105 120" stroke="#0F172A" stroke-width="2" fill="none" stroke-linecap="round" style="fill:none;stroke:rgb(15, 23, 42);color:rgb(255, 255, 255);stroke-width:2px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Ala izquierda de la pluma -->
+  <path d="M90 30 Q68 65 80 100 Q90 80 105 120" fill="#064E3B" opacity="0.9" style="fill:rgb(6, 78, 59);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.9;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Ala derecha de la pluma -->
+  <path d="M90 30 Q118 60 115 95 Q110 80 105 120" fill="#0F172A" opacity="0.85" style="fill:rgb(15, 23, 42);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.85;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Punta de la pluma -->
+  <path d="M103 118 L105 132 L108 118 Z" fill="#0F172A" style="fill:rgb(15, 23, 42);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Gota de tinta -->
+  <path d="M105 138 Q102 148 105 153 Q108 148 105 138Z" fill="#D4AF37" style="fill:rgb(212, 175, 55);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <!-- Brillo gota -->
+  <ellipse cx="103.5" cy="143" rx="1" ry="2" fill="#FDFCF8" opacity="0.5" style="fill:rgb(253, 252, 248);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.5;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Línea decorativa dorada -->
+  <line x1="130" y1="118" x2="560" y2="118" stroke="#D4AF37" stroke-width="0.8" opacity="0.4" style="fill:rgb(0, 0, 0);stroke:rgb(212, 175, 55);color:rgb(255, 255, 255);stroke-width:0.8px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.4;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Texto principal -->
+  <text x="138" y="105" font-size="52" style="fill:rgb(6, 78, 59);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Georgia, serif;font-size:52px;font-weight:400;text-anchor:start;dominant-baseline:auto">Ink<tspan style="fill:rgb(15, 23, 42);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Georgia, serif;font-size:52px;font-weight:700;text-anchor:start;dominant-baseline:auto">Inspire</tspan></text>
+  <!-- Subtítulo -->
+  <text x="140" y="138" style="fill:rgb(100, 116, 139);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:-apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:9px;font-weight:400;text-anchor:start;dominant-baseline:auto">BOOK REVIEWS &amp; COMMUNITY</text>
+</svg>
