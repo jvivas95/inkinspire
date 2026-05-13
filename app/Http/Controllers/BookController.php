@@ -76,8 +76,15 @@ class BookController extends Controller
         $googleBooksId = $request->input('google_books_id');
         $result = Book::where('google_books_id', $googleBooksId)->first();
         if ( $result == null ){
-            $booksValues = $this->googleBooks->getById($googleBooksId);
-            $book = Book::create($booksValues);
+            $book = Book::create($request->only([
+                'google_books_id',
+                'title',
+                'author',
+                'description',
+                'cover_image',
+                'published_year',
+                'genre'
+            ]));
 
             return redirect()->route('books.show', $book->id);
         }

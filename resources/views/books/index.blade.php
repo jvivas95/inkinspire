@@ -69,6 +69,12 @@
                             <form method="POST" action="{{ route('books.store') }}" class="mt-2">
                                 @csrf
                                 <input type="hidden" name="google_books_id" value="{{ data_get($book, 'google_books_id') }}">
+                                <input type="hidden" name="title" value="{{ data_get($book, 'title') }}">
+                                <input type="hidden" name="author" value="{{ data_get($book, 'author') }}">
+                                <input type="hidden" name="description" value="{{ data_get($book, 'description') }}">
+                                <input type="hidden" name="cover_image" value="{{ data_get($book, 'cover_image') }}">
+                                <input type="hidden" name="published_year" value="{{ data_get($book, 'published_year') }}">
+                                <input type="hidden" name="genre" value="{{ data_get($book, 'genre') }}">
                                 <button class="px-4 py-2 bg-[#064E3B] text-white rounded hover:bg-[#D4AF37]" type="submit">Ver detalles</button>
                             </form>
                         </div>
