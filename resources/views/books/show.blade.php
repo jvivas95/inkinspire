@@ -113,24 +113,26 @@
         </div>
 
         {{-- Edit Review Modal --}}
-        <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div class="bg-white rounded-lg p-6 w-full max-w-lg shadow-lg">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-semibold text-[#064E3B]">Editar Reseña</h2>
-                    <button onclick="document.getElementById('editModal').classList.add('hidden')" class="text-gray-500 hover:text-gray-700">✕</button>
-                </div>
-                <form method="POST" action="{{ route('reviews.update', $userReview->id) }}">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-4">
-                        <label for="body" class="block text-sm font-medium text-gray-700">Reseña</label>
-                        <textarea id="body" name="body" class="text-black block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" rows="4">{{ data_get($userReview, 'body') }}</textarea>
-                        <x-input-error :messages="$errors->get('body')" class="mt-2" />
+        @if ($userReview)
+            <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div class="bg-white rounded-lg p-6 w-full max-w-lg shadow-lg">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-[#064E3B]">Editar Reseña</h2>
+                        <button onclick="document.getElementById('editModal').classList.add('hidden')" class="text-gray-500 hover:text-gray-700">✕</button>
                     </div>
-                    <x-star-rating name="rating" :rating="$userReview->rating" />
-                    <button class="mt-4 px-4 py-2 bg-[#064E3B] text-white rounded hover:bg-[#D4AF37]" type="submit">Guardar</button>
-                </form>
+                    <form method="POST" action="{{ route('reviews.update', $userReview->id) }}">
+                        @csrf
+                        @method('PUT')
+                        <div class="mb-4">
+                            <label for="body" class="block text-sm font-medium text-gray-700">Reseña</label>
+                            <textarea id="body" name="body" class="text-black block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" rows="4">{{ data_get($userReview, 'body') }}</textarea>
+                            <x-input-error :messages="$errors->get('body')" class="mt-2" />
+                        </div>
+                        <x-star-rating name="rating" :rating="$userReview->rating" />
+                        <button class="mt-4 px-4 py-2 bg-[#064E3B] text-white rounded hover:bg-[#D4AF37]" type="submit">Guardar</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 </x-app-layout>
