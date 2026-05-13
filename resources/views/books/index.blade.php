@@ -57,7 +57,7 @@
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     @foreach ($books as $book)
-                        <div class="bg-gray-100 p-4 rounded-lg flex flex-col items-center">
+                        <div class="book-card bg-gray-100 p-4 rounded-lg flex flex-col items-center">
                             <img src="{{ data_get($book, 'cover_image') ?? asset('images/default-book.png') }}"
                             alt="{{ data_get($book, 'title') }} cover"
                             class="w-32 h-48 object-cover mb-2 shadow-md"
@@ -88,4 +88,21 @@
             @endif
         </div>
     </div>
+
+    <style>
+        .book-card {
+            transition: all 0.3s ease;
+        }
+        .book-card:hover {
+            transform: scale(1.05);
+            background-color: #064E3B;
+        }
+        .book-card:hover h2,
+        .book-card:hover p {
+            color: white;
+        }
+        .book-card:hover button {
+            background-color: #D4AF37;
+        }
+    </style>
 </x-app-layout>
