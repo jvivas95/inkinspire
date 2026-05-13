@@ -9,9 +9,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 class ProfileController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display the user's profile form.
      */
@@ -27,6 +30,8 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        $this->authorize('update', $request->user());
+
         $request->user()->fill(collect($request->validated())->except('avatar')->toArray());
 
         if ($request->user()->isDirty('email')) {
@@ -55,6 +60,8 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $this->authorize('delete', $request->user());
+
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);

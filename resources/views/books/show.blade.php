@@ -83,14 +83,18 @@
                 <p class="text-sm text-gray-600">Publicado: {{ $userReview->updated_at->diffForHumans(['short' => true]) }}</p>
                 <p class="mt-2 text-black">{{ data_get($userReview, 'body') }}</p>
                 <div class="flex gap-2 mt-4">
+                    @can ('update', $userReview)
                     <button class="px-4 py-2 bg-[#064E3B] text-white rounded hover:bg-[#D4AF37]" onclick="document.getElementById('editModal').classList.remove('hidden')">
                         Editar
                     </button>
+                    @endcan
+                    @can ('delete', $userReview)
                     <form method="POST" action="{{ route('reviews.destroy', $userReview->id) }}">
                         @csrf
                         @method('DELETE')
                         <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700" type="submit">Eliminar</button>
                     </form>
+                    @endcan
                 </div>
             </div>
             @else

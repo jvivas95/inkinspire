@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+use App\Http\Requests\StoreReviewRequest;
+use App\Http\Requests\UpdateReviewRequest;
 
 class ReviewController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -28,15 +32,9 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreReviewRequest $request)
     {
         //
-
-        $request->validate([
-            'body' => 'required|string|min:20|max:2000',
-            'rating' => 'required|integer|min:1|max:5',
-            'book_id' => 'required|exists:books,id',
-        ]);
 
         $exist = Review::where('user_id', Auth::id())
             ->where('book_id', $request->input('book_id'))
@@ -80,13 +78,11 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateReviewRequest $request, string $id)
     {
         //
         $review = Review::findOrFail($id);
-        if ($review->user_id !== Auth::id()){
-            abort(403);
-        }
+        $this->authorize('update', $review);
 
         $request->validate([
             'body' => 'required|string|min:20|max:2000',
@@ -109,9 +105,7 @@ class ReviewController extends Controller
         //
         $review = Review::findOrFail($id);
 
-        if ($review->user_id !== Auth::id()){
-            abort(403);
-        }
+        $this->authorize('delete', $review);
 
         $review->delete();
 

@@ -3,8 +3,14 @@
 namespace App\Providers;
 
 use App\Models\Review;
+use App\Models\User;
+use App\Policies\ReviewPolicy;
+use App\Policies\UserPolicy;
+
 use Illuminate\Support\ServiceProvider;
 use App\Observers\ReviewObserver;
+use Illuminate\Support\Facades\Gate;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Review::observe(ReviewObserver::class);
+        Gate::policy(User::class, UserPolicy::class);
+        Gate::policy(Review::class, ReviewPolicy::class);
     }
 }
