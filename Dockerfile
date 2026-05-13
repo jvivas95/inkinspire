@@ -10,7 +10,7 @@ ENV WEBROOT /var/www/html/public
 ENV PHP_ERRORS_STDERR 1
 
 # Instalamos dependencias de PHP
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 # Damos permisos a las carpetas necesarias
 RUN chmod -R 775 storage bootstrap/cache
