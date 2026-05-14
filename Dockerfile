@@ -15,12 +15,6 @@ ENV PHP_ERRORS_STDERR 1
 # Instalamos dependencias de PHP
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
-# Instalar Node.js en Alpine
-RUN apk add --no-cache nodejs npm
-
-# Instalar dependencias de Node y compilar assets
-RUN npm install && npm run build
-
 # Damos permisos a las carpetas necesarias
 RUN chmod -R 775 storage bootstrap/cache
 
