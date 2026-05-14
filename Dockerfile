@@ -4,6 +4,9 @@ FROM richarvey/nginx-php-fpm:latest
 # Copiamos todo el código de nuestro proyecto al servidor
 COPY . .
 
+# Copiamos la configuración personalizada de Nginx para Laravel
+COPY conf/ /etc/nginx/
+
 # Configuración de Laravel para Render
 ENV SKIP_COMPOSER 0
 ENV WEBROOT /var/www/html/public
