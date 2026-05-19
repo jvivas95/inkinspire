@@ -12,16 +12,22 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                        {{ __('Inicio') }}
+                    </x-nav-link>
+                    @auth
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
                         {{ __('Books') }}
                     </x-nav-link>
+                    @endauth
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -64,12 +70,33 @@
                     </svg>
                 </button>
             </div>
+            @endauth
+
+            {{-- Auth buttons --}}
+            @guest
+            <div class="inline-flex items-center">
+                <a href="{{ route('login') }}"
+                    style="color: var(--ink-dark); font-size: 0.9rem; font-weight: 500;"
+                    class="hover:text-white transition px-3 py-2">
+                    Login
+                </a>
+                <a href="{{ route('register') }}"
+                    style="background: var(--ink-dark); color: white; font-size: 0.9rem; font-weight: 600;"
+                    class="px-5 py-2 rounded-lg hover:opacity-90 transition">
+                    Registro
+                </a>
+            </div>
+            @endguest
         </div>
     </div>
 
     <!-- Responsive Navigation Menu -->
+    @auth
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                {{ __('Inicio') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
@@ -103,4 +130,5 @@
             </div>
         </div>
     </div>
+    @endauth
 </nav>

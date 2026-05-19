@@ -82,12 +82,17 @@
             color: var(--ink-dark);
             font-size: 0.9rem;
             font-weight: 500;
-            padding: 0.25rem 0;
+            padding: 0;
             border-bottom: 2px solid transparent;
             transition: color 0.2s, border-color 0.2s;
             text-decoration: none;
         }
         .nav-link:hover { color: var(--ink-gold); border-color: var(--ink-gold); }
+        .nav-link.active,
+        .nav-link[aria-current="page"] {
+            color: var(--ink-gold);
+            border-color: var(--ink-gold);
+        }
 
         /* Activity */
         .activity-dot {
@@ -117,39 +122,7 @@
     {{-- ═══════════════════════════════════════════════════════════
          NAVBAR
     ═══════════════════════════════════════════════════════════ --}}
-    <nav style="background: var(--ink-bg); border-bottom: 1px solid rgba(15,23,42,0.08);">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-
-                {{-- Logo --}}
-                <a href="{{ route('home') }}" class="flex items-center gap-3">
-                    <img src="{{ asset('images/logov3.png') }}" alt="InkInspire" class="h-12 w-auto">
-                </a>
-
-                {{-- Nav links --}}
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="{{ route('home') }}" class="nav-link" style="color: var(--ink-gold); border-color: var(--ink-gold);">Inicio</a>
-                    <a href="#resenas" class="nav-link">Comunidad</a>
-                    <a href="#libros" class="nav-link">Explorar</a>
-                </div>
-
-                {{-- Auth buttons --}}
-                <div class="flex items-center gap-3">
-                    <a href="{{ route('login') }}"
-                       style="color: var(--ink-dark); font-size: 0.9rem; font-weight: 500;"
-                       class="hover:text-white transition px-3 py-2">
-                        Login
-                    </a>
-                    <a href="{{ route('register') }}"
-                       style="background: var(--ink-dark); color: white; font-size: 0.9rem; font-weight: 600;"
-                       class="px-5 py-2 rounded-lg hover:opacity-90 transition">
-                        Registro
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    </nav>
+    @include('layouts.navigation')
 
     {{-- ═══════════════════════════════════════════════════════════
          HERO
