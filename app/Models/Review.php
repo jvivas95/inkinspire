@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\User;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
 
 class Review extends Model
 {
@@ -29,5 +30,19 @@ class Review extends Model
     public function book(): BelongsTo
     {
         return $this->belongsTo(Book::class);
+    }
+
+    public function reviewLikes()
+    {
+        return $this->hasMany(ReviewLike::class);
+    }
+
+    public function isLikedBy(User $user): bool
+    {
+        if (!Auth::check()){
+            return false;
+        }
+
+        return $this->reviewLikes()->where('user_id', $user->id)->exists();
     }
 }
