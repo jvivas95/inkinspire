@@ -17,10 +17,10 @@
                     </x-nav-link>
                     @auth
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Perfil') }}
                     </x-nav-link>
                     <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
-                        {{ __('Books') }}
+                        {{ __('Libros') }}
                     </x-nav-link>
                     @endauth
                 </div>
@@ -99,10 +99,10 @@
                 {{ __('Inicio') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                {{ __('Perfil') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
-                {{ __('Books') }}
+                {{ __('Libros') }}
             </x-responsive-nav-link>
         </div>
 
