@@ -43,17 +43,61 @@
 
                 {{-- Right Column: Details --}}
                 <div class="w-full md:w-2/3 space-y-4">
-                    <div class="flex gap-2">
-                        <p class="font-bold text-[#064E3B]">Título:</p>
-                        <p class="text-black">{{ data_get($book, 'title') }}</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <p class="font-bold text-[#064E3B]">Autor:</p>
-                        <p class="text-black">{{ data_get($book, 'author') }}</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <p class="font-bold text-[#064E3B]">Año de Publicación:</p>
-                        <p class="text-black">{{ data_get($book, 'published_year') }}</p>
+                    {{-- 🟢 SUCCESS: Added to favorites --}}
+                    @if (session('success'))
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-2.5 rounded-md flex justify-between items-center shadow-sm text-sm animate-fade-in">
+                            <div class="flex items-center gap-2">
+                                <span>✨</span>
+                                <span class="font-medium">{{ session('success') }}</span>
+                            </div>
+                            <button onclick="this.parentElement.remove()" class="text-green-500 hover:text-green-700 font-bold text-lg leading-none">
+                                &times;
+                            </button>
+                        </div>
+                    @endif
+                    {{-- 🔴 DELETE: Removed from favorites --}}
+                    @if (session('delete'))
+                        <div class="bg-red-50 border border-red-100 text-red-800 px-4 py-2.5 rounded-md flex justify-between items-center shadow-xs text-sm">
+                            <div class="flex items-center gap-2">
+                                {{-- Tu SVG de la X roja --}}
+                                <svg class="w-4 h-4 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                                <span class="font-medium">{{ session('delete') }}</span>
+                            </div>
+                            <button onclick="this.parentElement.remove()" class="text-red-400 hover:text-red-600 font-bold text-lg leading-none">
+                                &times;
+                            </button>
+                        </div>
+                    @endif
+                    <div class="flex justify-between items-start">
+                        <div class="w-auto space-y-4">
+                            <div class="flex gap-2">
+                                <p class="font-bold text-[#064E3B]">Título:</p>
+                                <p class="text-black">{{ data_get($book, 'title') }}</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <p class="font-bold text-[#064E3B]">Autor:</p>
+                                <p class="text-black">{{ data_get($book, 'author') }}</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <p class="font-bold text-[#064E3B]">Año de Publicación:</p>
+                                <p class="text-black">{{ data_get($book, 'published_year') }}</p>
+                            </div>
+                        </div>
+                        <div class="boder border-solid">
+                            <form method="POST" action="{{ route('books.favorite', $book) }}">
+                                @csrf
+                                <button type="submit" >
+                                    @if ($isFavorite)
+                                    <img src="{{ asset('images/bookmark_icon_fav.svg') }}" alt="Bookmark Icon" class="w-12 h-12 md:w-16 md:h-16">
+                                    @else
+                                    <img src="{{ asset('images/bookmark_icon.svg') }}" alt="Bookmark Icon" class="w-12 h-12 md:w-16 md:h-16">
+                                    @endif
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     <div class="flex gap-2">
                         <p class="font-bold text-[#064E3B]">Género:</p>

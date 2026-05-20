@@ -18,6 +18,8 @@ class BookFavoriteController extends Controller
 
         if ($favorite) {
             $favorite->delete();
+
+            return redirect()->route('books.show', $book->id)->with('delete', 'Eliminado de favoritos');
         }
         else {
             BookFavorite::create([
@@ -26,6 +28,6 @@ class BookFavoriteController extends Controller
             ]);
         }
 
-        return redirect()->route('books.show', $book->id)->with('success', 'Tu favorito ha sido registrado.');
+        return redirect()->route('books.show', $book->id)->with('success', 'Añadido a libros favoritos');
     }
 }
