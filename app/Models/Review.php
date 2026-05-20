@@ -32,7 +32,7 @@ class Review extends Model
         return $this->belongsTo(Book::class);
     }
 
-    public function reviewLikes()
+    public function likes()
     {
         return $this->hasMany(ReviewLike::class);
     }
@@ -43,6 +43,6 @@ class Review extends Model
             return false;
         }
 
-        return $this->reviewLikes()->where('user_id', $user->id)->exists();
+        return $this->likes()->where('user_id', $user->id)->exists();
     }
 }
