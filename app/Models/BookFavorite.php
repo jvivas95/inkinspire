@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Book;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BookFavorite extends Model
 {
@@ -13,4 +15,9 @@ class BookFavorite extends Model
     ];
 
     public $timestamps = false;
+
+    public function book(): BelongsTo
+    {
+        return $this->belongsTo(Book::class);
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ReadingList;
 use App\Models\Review;
 use App\Models\Book;
+use App\Models\BookFavorite;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -29,6 +30,8 @@ class DashboardController extends Controller
                             ->take(5)
                             ->get();
 
-        return view('dashboard', compact('userReadingList', 'wantToRead', 'reading', 'read', 'latestReviews', 'topRatedBooks'));
+        $favoriteBooks = BookFavorite::where('user_id', Auth::id())->with('book')->get();
+
+        return view('dashboard', compact('userReadingList', 'wantToRead', 'reading', 'read', 'latestReviews', 'topRatedBooks', 'favoriteBooks'));
     }
 }
