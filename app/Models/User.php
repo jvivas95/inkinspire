@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Review;
 use App\Models\ReadingList;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 #[Fillable(['name', 'email', 'password', 'username', 'avatar', 'bio'])]
 #[Hidden(['password', 'remember_token'])]
@@ -46,6 +47,11 @@ class User extends Authenticatable
     public function reviewLikes(): HasMany
     {
         return $this->hasMany(ReviewLike::class);
+    }
+
+    public function bookFavorites(): BelongsToMany
+    {
+        return $this->belongsToMany(Book::class, 'book_favorites')->withTimestamps();
     }
 
 }
