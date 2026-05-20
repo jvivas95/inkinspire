@@ -75,26 +75,38 @@
         {{-- Reviews Section Card --}}
         <div class="bg-white shadow-md rounded-lg p-6">
             <div class="mb-4 border-b pb-2 text-xl font-semibold text-center">
-                <p class="text-[#064E3B]">Reseñas</p>
+                <p class="text-[#064E3B]">Mi reseña</p>
             </div>
             @if ($userReview)
             <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                <p class="font-semibold">{{ $userReview->user->name }}</p>
+                <p class="font-semibold">{{ $userReview->user->name }} - {{ $userReview->user->username }}</p>
                 <p class="text-sm text-gray-600">Publicado: {{ $userReview->updated_at->diffForHumans(['short' => true]) }}</p>
                 <p class="mt-2 text-black">{{ data_get($userReview, 'body') }}</p>
-                <div class="flex gap-2 mt-4">
-                    @can ('update', $userReview)
-                    <button class="px-4 py-2 bg-[#064E3B] text-white rounded hover:bg-[#D4AF37]" onclick="document.getElementById('editModal').classList.remove('hidden')">
-                        Editar
-                    </button>
-                    @endcan
-                    @can ('delete', $userReview)
-                    <form method="POST" action="{{ route('reviews.destroy', $userReview->id) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700" type="submit">Eliminar</button>
-                    </form>
-                    @endcan
+                <div class="flex gap-2 mt-4 justify-between">
+                    <div class="flex gap-2">
+                        @can ('update', $userReview)
+                        <button class="px-4 py-2 bg-[#064E3B] text-white rounded hover:bg-[#D4AF37]" onclick="document.getElementById('editModal').classList.remove('hidden')">
+                            Editar
+                        </button>
+                        @endcan
+                        @can ('delete', $userReview)
+                        <form method="POST" action="{{ route('reviews.destroy', $userReview->id) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700" type="submit">Eliminar</button>
+                        </form>
+                        @endcan
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <form method="POST" action="{{ route('reviews.like', $userReview) }}">
+                            @csrf
+                            <input type="hidden" name="book_id" value="{{ $book->id }}">
+                            <button type="submit" class="flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                                <span class="{{ $userReview->isLikedBy(auth()->user()) ? 'text-red-400' : 'text-gray-300' }} text-3xl">♥</span>
+                                <span class="text-gray-500 text-sm">{{ $userReview->likes->count() }}</span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
             @else
@@ -111,6 +123,33 @@
             </form>
             @endif
         </div>
+        @foreach ($reviews as $review)
+            @if($review->id == $userReview?->id)
+                @continue
+            @endif
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <div class="mb-4 border-b pb-2 text-xl font-semibold text-center">
+                    <p class="text-[#064E3B]">Reseñas de otros usuarios</p>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg mb-4 flex flex-col">
+                    <p class="font-semibold">{{ $review->user->name }} - {{ $review->user->username }}</p>
+                    <p class="text-sm text-gray-600">Publicado: {{ $review->updated_at->diffForHumans(['short' => true]) }}</p>
+                    <p class="mt-2 text-black">{{ data_get($review, 'body') }}</p>
+                    <div class="flex justify-end mt-4">
+                        <div class="flex gap-2 px-2 py-1">
+                            <form method="POST" action="{{ route('reviews.like', $review) }}">
+                                @csrf
+                                <input type="hidden" name="book_id" value="{{ $book->id }}">
+                                <button type="submit" class="flex items-center gap-1 bg-transparent border-none cursor-pointer">
+                                    <span class="{{ $review->isLikedBy(auth()->user()) ? 'text-red-400' : 'text-gray-300' }} text-3xl">♥</span>
+                                    <span class="text-gray-500 text-sm">{{ $review->likes->count() }}</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
 
         {{-- Edit Review Modal --}}
         @if ($userReview)

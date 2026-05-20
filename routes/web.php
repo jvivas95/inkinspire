@@ -6,6 +6,7 @@ use App\Http\Controllers\ReadingListController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReviewLikeController;
 use App\Models\ReadingList;
 use App\Models\Review;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('reviews', ReviewController::class)->only(['store', 'edit', 'update', 'destroy']);
     Route::post('reading-list', [ReadingListController::class, 'store'])->name('reading-list.store');
     Route::delete('reading-list/{readingList}', [ReadingListController::class, 'destroy'])->name('reading-list.destroy');
+    Route::post('reviews/{review}/like', [ReviewLikeController::class, 'store'])->name('reviews.like');
 });
 
 
