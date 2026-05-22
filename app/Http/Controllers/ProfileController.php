@@ -40,13 +40,17 @@ class ProfileController extends Controller
 
         // Handle avatar upload if a new file is provided
         if ($request->hasFile('avatar')) {
+
+            // Detect which disk to use (S3 in production, public on local)
+            $disk = env('FILESYSTEM_DISK', 'public');
+
             // Delete the old avatar if it exists
             if ($request->user()->avatar) {
-                Storage::disk('public')->delete($request->user()->avatar);
+                Storage::disk($disk)->delete($request->user()->avatar);
             }
 
             // Store the new avatar and update the user's avatar path
-            $path = $request->file('avatar')->store('avatars', 'public');
+            $path = $request->file('avatar')->store('avatars', $disk);
             $request->user()->avatar = $path;
         }
 
