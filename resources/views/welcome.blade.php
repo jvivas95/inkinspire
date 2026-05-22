@@ -41,7 +41,6 @@
 
         /* Cards */
         .review-card {
-            background: white;
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
@@ -171,95 +170,89 @@
     </section>
 
     {{-- ═══════════════════════════════════════════════════════════
-         ÚLTIMAS RESEÑAS + ACTIVIDAD
+         CÓMO FUNCIONA
     ═══════════════════════════════════════════════════════════ --}}
-    <section id="resenas" class="py-16 px-4" style="background: var(--ink-bg);">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col lg:flex-row gap-8">
-
-                {{-- Reseñas --}}
-                <div class="flex-1">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="font-playfair text-2xl font-bold" style="color: var(--ink-header);">
-                            Últimas Reseñas de la Comunidad
-                        </h2>
-                        <a href="{{ route('register') }}"
-                           class="text-sm font-medium hover:underline"
-                           style="color: var(--ink-dark);">Ver todas →</a>
+    <section id="como-funciona" class="py-16 px-4" style="background: var(--ink-bg);">
+        <div class="max-w-5xl mx-auto text-center">
+            <p class="text-sm font-semibold tracking-widest uppercase mb-2" style="color: var(--ink-gold);">Simple y rápido</p>
+            <h2 class="font-playfair text-3xl font-bold mb-12" style="color: var(--ink-header);">
+                ¿Cómo funciona InkInspire?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4"
+                         style="background: var(--ink-dark); color: var(--ink-gold);">
+                        📚
                     </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        @forelse($latestReviews as $review)
-                        <div class="review-card">
-                            <div class="flex items-center gap-3 mb-3">
-                                <div style="width:40px;height:40px;border-radius:50%;background:var(--ink-dark);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.85rem;flex-shrink:0;">
-                                    {{ strtoupper(substr($review->user->name, 0, 1)) }}
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-sm" style="color: var(--ink-header);">{{ $review->user->name }}</p>
-                                    <div class="stars">
-                                        @for($i = 1; $i <= 5; $i++)
-                                            {{ $i <= $review->rating ? '★' : '☆' }}
-                                        @endfor
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-sm font-semibold mb-1" style="color: var(--ink-dark);">
-                                "{{ $review->book->title }}"
-                            </p>
-                            <p class="text-sm line-clamp-3" style="color: var(--ink-muted);">
-                                {{ $review->body }}
-                            </p>
-                        </div>
-                        @empty
-                        <div class="review-card md:col-span-2 text-center py-8">
-                            <p style="color: var(--ink-muted);">Sé el primero en escribir una reseña.</p>
-                            <a href="{{ route('register') }}" class="inline-block mt-3 px-5 py-2 rounded-lg text-sm font-semibold text-white" style="background: var(--ink-dark);">
-                                Únete ahora
-                            </a>
-                        </div>
-                        @endforelse
-                    </div>
+                    <h3 class="font-playfair text-lg font-bold mb-2" style="color: var(--ink-header);">1. Descubre libros</h3>
+                    <p class="text-sm leading-relaxed" style="color: var(--ink-muted);">
+                        Busca entre miles de libros usando nuestra integración con Google Books y encuentra tu próxima lectura.
+                    </p>
                 </div>
-
-                {{-- Actividad reciente --}}
-                <div style="width: 100%; max-width: 300px;">
-                    <h2 class="font-playfair text-2xl font-bold mb-6" style="color: var(--ink-header);">
-                        Actividad Reciente
-                    </h2>
-                    <div class="review-card flex flex-col gap-4">
-                        @forelse($latestReviews->take(3) as $review)
-                        <div class="flex items-start gap-3">
-                            <div class="activity-dot" style="background: var(--ink-dark);">
-                                {{ strtoupper(substr($review->user->name, 0, 1)) }}
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-semibold" style="color: var(--ink-header);">{{ $review->user->name }}</p>
-                                <p class="text-xs" style="color: var(--ink-muted);">
-                                    reseñó <span style="color: var(--ink-dark); font-weight:600;">{{ Str::limit($review->book->title, 25) }}</span>
-                                </p>
-                                <p class="text-xs mt-0.5" style="color: #94a3b8;">{{ $review->created_at->diffForHumans() }}</p>
-                            </div>
-                        </div>
-                        @empty
-                        <p class="text-sm text-center" style="color: var(--ink-muted);">Sin actividad reciente.</p>
-                        @endforelse
-
-                        <a href="{{ route('register') }}"
-                           class="block w-full text-center py-2.5 rounded-lg text-sm font-semibold mt-2 transition"
-                           style="border: 1.5px solid var(--ink-dark); color: var(--ink-dark);"
-                           onmouseover="this.style.background='var(--ink-dark)';this.style.color='white'"
-                           onmouseout="this.style.background='transparent';this.style.color='var(--ink-dark)'">
-                            Participar ahora
-                        </a>
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4"
+                         style="background: var(--ink-dark); color: var(--ink-gold);">
+                        ✍️
                     </div>
+                    <h3 class="font-playfair text-lg font-bold mb-2" style="color: var(--ink-header);">2. Escribe tu reseña</h3>
+                    <p class="text-sm leading-relaxed" style="color: var(--ink-muted);">
+                        Comparte tu opinión con la comunidad, puntúa los libros que has leído y ayuda a otros lectores.
+                    </p>
                 </div>
-
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4"
+                         style="background: var(--ink-dark); color: var(--ink-gold);">
+                        📖
+                    </div>
+                    <h3 class="font-playfair text-lg font-bold mb-2" style="color: var(--ink-header);">3. Organiza tus lecturas</h3>
+                    <p class="text-sm leading-relaxed" style="color: var(--ink-muted);">
+                        Gestiona tus listas de lectura: lo que quieres leer, lo que estás leyendo y lo que ya has terminado.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     {{-- ═══════════════════════════════════════════════════════════
+        NUESTRA MISIÓN / DETRÁS DE INKINSPIRE
+    ═══════════════════════════════════════════════════════════ --}}
+    <section class="py-16 px-4 bg-white border-y border-gray-100">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-10">
+
+            <div class="w-full md:w-1/3 flex justify-center">
+                <div class="relative p-6 bg-amber-50 rounded-2xl border border-amber-200 shadow-sm text-center transform -rotate-2">
+                    <span class="text-4xl block mb-2">💡</span>
+                    <p class="font-playfair text-xl font-bold italic" style="color: var(--ink-dark);">
+                        "Un libro puede cambiar tu mentalidad y tu vida."
+                    </p>
+                    <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-amber-300 rounded-full"></div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-2/3 space-y-4">
+                <p class="text-xs font-semibold tracking-widest uppercase" style="color: var(--ink-gold);">
+                    La historia detrás del proyecto
+                </p>
+                <h2 class="font-playfair text-3xl font-bold" style="color: var(--ink-header);">
+                    Por qué creé InkInspire
+                </h2>
+                <div class="text-sm leading-relaxed space-y-3" style="color: var(--ink-muted);">
+                    <p>
+                        Para ser honesto, nunca fui una persona a la que le gustara leer. Durante años, los libros no formaban parte de mi día a día. Sin embargo, hace unos meses todo cambió: me interesé por varios libros que, de manera inesperada, me cambiaron la mentalidad y la vida.
+                    </p>
+                    <p>
+                        Tras experimentar ese "clic", entendí el poder transformador de la lectura. Por eso nació <b class="text-[#064e3b] font-bold">InkInspire</b>: para fomentar el hábito lector conectando a las personas de una manera dinámica y atractiva.
+                    </p>
+                    <p class="font-medium" style="color: var(--ink-dark);">
+                        Este espacio está diseñado para que registres tus lecturas, compartas tus experiencias y descubras, tal y como me ocurrió a mí, tu próxima gran historia.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+        {{-- ═══════════════════════════════════════════════════════════
          LIBROS MÁS VALORADOS
     ═══════════════════════════════════════════════════════════ --}}
     <section id="libros" class="py-16 px-4" style="background: #F8F7F3;">
@@ -305,53 +298,106 @@
     </section>
 
     {{-- ═══════════════════════════════════════════════════════════
-         CÓMO FUNCIONA
+         ÚLTIMAS RESEÑAS
     ═══════════════════════════════════════════════════════════ --}}
-    <section id="como-funciona" class="py-16 px-4" style="background: var(--ink-bg);">
-        <div class="max-w-5xl mx-auto text-center">
-            <p class="text-sm font-semibold tracking-widest uppercase mb-2" style="color: var(--ink-gold);">Simple y rápido</p>
-            <h2 class="font-playfair text-3xl font-bold mb-12" style="color: var(--ink-header);">
-                ¿Cómo funciona InkInspire?
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4"
-                         style="background: var(--ink-dark); color: var(--ink-gold);">
-                        📚
+    <section id="resenas" class="py-16 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col lg:flex-row gap-8">
+
+                {{-- Reseñas --}}
+                <div class="flex-1">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="font-playfair text-2xl font-bold" style="color: var(--ink-header);">
+                            Últimas Reseñas de la Comunidad
+                        </h2>
+                        <a href="{{ route('register') }}"
+                           class="text-sm font-medium hover:underline"
+                           style="color: var(--ink-dark);">Ver todas →</a>
                     </div>
-                    <h3 class="font-playfair text-lg font-bold mb-2" style="color: var(--ink-header);">1. Descubre libros</h3>
-                    <p class="text-sm leading-relaxed" style="color: var(--ink-muted);">
-                        Busca entre miles de libros usando nuestra integración con Google Books y encuentra tu próxima lectura.
-                    </p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4"
-                         style="background: var(--ink-dark); color: var(--ink-gold);">
-                        ✍️
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        @forelse($latestReviews as $review)
+                        <div class="review-card" style="background: var(--ink-bg)">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div style="width:40px;height:40px;border-radius:50%;background:var(--ink-dark);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.85rem;flex-shrink:0;">
+                                    {{ strtoupper(substr($review->user->name, 0, 1)) }}
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm" style="color: var(--ink-header);">{{ $review->user->name }}</p>
+                                    <div class="stars">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            {{ $i <= $review->rating ? '★' : '☆' }}
+                                        @endfor
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-sm font-semibold mb-1" style="color: var(--ink-dark);">
+                                "{{ $review->book->title }}"
+                            </p>
+                            <p class="text-sm line-clamp-3" style="color: var(--ink-muted);">
+                                {{ $review->body }}
+                            </p>
+                        </div>
+                        @empty
+                        <div class="review-card md:col-span-2 text-center py-8">
+                            <p style="color: var(--ink-muted);">Sé el primero en escribir una reseña.</p>
+                            <a href="{{ route('register') }}" class="inline-block mt-3 px-5 py-2 rounded-lg text-sm font-semibold text-white" style="background: var(--ink-dark);">
+                                Únete ahora
+                            </a>
+                        </div>
+                        @endforelse
                     </div>
-                    <h3 class="font-playfair text-lg font-bold mb-2" style="color: var(--ink-header);">2. Escribe tu reseña</h3>
-                    <p class="text-sm leading-relaxed" style="color: var(--ink-muted);">
-                        Comparte tu opinión con la comunidad, puntúa los libros que has leído y ayuda a otros lectores.
-                    </p>
-                </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4"
-                         style="background: var(--ink-dark); color: var(--ink-gold);">
-                        📖
-                    </div>
-                    <h3 class="font-playfair text-lg font-bold mb-2" style="color: var(--ink-header);">3. Organiza tus lecturas</h3>
-                    <p class="text-sm leading-relaxed" style="color: var(--ink-muted);">
-                        Gestiona tus listas de lectura: lo que quieres leer, lo que estás leyendo y lo que ya has terminado.
-                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     {{-- ═══════════════════════════════════════════════════════════
+        Actividad reciente
+    ═══════════════════════════════════════════════════════════ --}}
+    <section id="actividad" class="py-16 px-4" style="background: #F8F7F3;">
+        <div class="max-w-7xl mx-auto flex flex-col">
+
+            <h2 class="font-playfair text-2xl font-bold mb-6" style="color: var(--ink-header);">
+                Actividad Reciente
+            </h2>
+
+            <div class="review-card flex flex-col gap-4 bg-white w-full max-w-md mx-auto">
+                @forelse($latestReviews->take(3) as $review)
+                <div class="flex items-start gap-3">
+                    <div class="activity-dot" style="background: var(--ink-dark);">
+                        {{ strtoupper(substr($review->user->name, 0, 1)) }}
+                    </div>
+                    <div class="flex-1 min-w-0 text-left">
+                        <p class="text-sm font-semibold" style="color: var(--ink-header);">{{ $review->user->name }}</p>
+                        <p class="text-xs" style="color: var(--ink-muted);">
+                            reseñó <span style="color: var(--ink-dark); font-weight:600;">{{ Str::limit($review->book->title, 25) }}</span>
+                        </p>
+                        <p class="text-xs mt-0.5" style="color: #94a3b8;">{{ $review->created_at->diffForHumans() }}</p>
+                    </div>
+                </div>
+                @empty
+                <p class="text-sm text-center py-4" style="color: var(--ink-muted);">Sin actividad reciente.</p>
+                @endforelse
+
+                <a href="{{ route('register') }}"
+                    class="block w-full text-center py-2.5 rounded-lg text-sm font-semibold mt-2 transition"
+                    style="border: 1.5px solid var(--ink-dark); color: var(--ink-dark);"
+                    onmouseover="this.style.background='var(--ink-dark)';this.style.color='white'"
+                    onmouseout="this.style.background='transparent';this.style.color='var(--ink-dark)'">
+                    Participar ahora
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    {{-- ═══════════════════════════════════════════════════════════
          CTA BANNER
     ═══════════════════════════════════════════════════════════ --}}
-    <section class="py-16 px-4" style="background: #F8F7F3;">
+    <section class="py-16 px-4 bg-white">
         <div class="max-w-5xl mx-auto">
             <div class="cta-banner text-white">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -423,7 +469,6 @@
             </div>
             <div class="border-t pt-6 flex flex-col md:flex-row items-center justify-between gap-3" style="border-color: rgba(255,255,255,0.1);">
                 <p class="text-xs">© {{ date('Y') }} InkInspire. Todos los derechos reservados.</p>
-                <p class="text-xs">Hecho con ❤️ para lectores</p>
             </div>
         </div>
     </footer>
