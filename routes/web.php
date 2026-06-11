@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('reading-list/{readingList}', [ReadingListController::class, 'destroy'])->name('reading-list.destroy');
     Route::post('reviews/{review}/like', [ReviewLikeController::class, 'store'])->name('reviews.like');
     Route::post('books/{book}/favorite', [BookFavoriteController::class, 'store'])->name('books.favorite');
+    Route::get('/users/{username}', [ProfileController::class, 'show'])->name('profile.show');
 });
 
 

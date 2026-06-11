@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use App\Models\User;
 
 
 class ProfileController extends Controller
@@ -80,5 +81,17 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Display a user's profile by username.
+     */
+    public function show($username)
+    {
+        $publicUser = User::where('username', $username)->firstOrFail();
+
+        return view('profile.show', [
+            'publicUser' => $publicUser
+        ]);
     }
 }
