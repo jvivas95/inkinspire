@@ -1,14 +1,60 @@
 <x-app-layout>
     <x-slot name="title">
-        {{ $publicUser->name }}'s Profile - {{ config('app.name', 'InkInspire') }}
+        {{ $publicUser->name }} - {{ config('app.name', 'InkInspire') }}
     </x-slot>
 
-    <div class="container mx-auto px-4 py-6">
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <h1 class="text-2xl font-bold mb-4">{{ $publicUser->name }}'s Profile</h1>
-            <p><strong>Username:</strong> {{ $publicUser->username }}</p>
-            <p><strong>Email:</strong> {{ $publicUser->email }}</p>
-            <p><strong>Joined:</strong> {{ $publicUser->created_at->format('F j, Y') }}</p>
+    <div class="max-w-4xl mx-auto py-8">
+        <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center space-x-6">
+                <img src="{{ Storage::url($publicUser->avatar ?? 'images/default-avatar.png') }}" alt="{{ $publicUser->name }}'s Profile Picture" class="w-36 h-36 rounded-full object-cover">
+
+                <div class="flex-1">
+                    <div class="flex items-center space-x-4">
+                        <h2 class="text-2xl font-semibold">{{ $publicUser->username }}</h2>
+
+                        @if(auth()->check() && auth()->user()->id === $publicUser->id)
+                            <a href="{{ url('/profile/edit') }}" class="px-4 py-1 border rounded text-sm">Editar perfil</a>
+                        @else
+
+                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded text-sm">Seguir</button>
+                        @endif
+                    </div>
+
+                    <div class="mt-4 flex space-x-6 text-sm">
+                        {{-- <div><span class="font-semibold">{{ optional($reviewsGuestUser)->count() ?? 0 }}</span> comentarios</div> --}}
+                        <div><span class="font-semibold">{{ optional($publicUser->followers)->count() ?? 0 }}</span> seguidores</div>
+                        <div><span class="font-semibold">{{ optional($publicUser->following)->count() ?? 0 }}</span> seguidos</div>
+                    </div>
+
+                    <div class="mt-4">
+                        <p class="font-medium">{{ $publicUser->name }}</p>
+                        @if(!empty($publicUser->bio))
+                            <p class="text-sm text-gray-600">{{ $publicUser->bio }}</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6">
+            {{-- @php
+                $books = $publicUser->books ?? collect();
+            @endphp
+
+            @if($books->count())
+                <div class="grid grid-cols-3 gap-1">
+                    @foreach($books as $book)
+                        <a href="{{ url('books/'.$book->id) }}" class="block">
+                            <img src="{{ Storage::url($book->cover ?? 'images/book-placeholder.png') }}" alt="{{ $book->title ?? 'Book' }}" class="w-full h-40 object-cover">
+                        </a>
+                    @endforeach
+                </div>
+            @else
+                <div class="bg-white rounded-lg shadow p-6 text-center text-gray-500">
+                    Este usuario no ha publicado nada todavía.
+                </div>
+            @endif --}}
+
         </div>
     </div>
 </x-app-layout>

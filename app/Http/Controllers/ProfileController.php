@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Review;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\User;
+use App\Models\Reviews;
 
 
 class ProfileController extends Controller
@@ -86,12 +88,14 @@ class ProfileController extends Controller
     /**
      * Display a user's profile by username.
      */
-    public function show($username)
+    public function show($userName)
     {
-        $publicUser = User::where('username', $username)->firstOrFail();
+        $publicUser = User::where('username', $userName)->firstOrFail();
+        $reviewsGuestUser = Review::where('user_id', $publicUser->id)->get();
 
         return view('profile.show', [
-            'publicUser' => $publicUser
+            'publicUser' => $publicUser,
+            'reviewsGuestUser' => $reviewsGuestUser
         ]);
     }
 }
