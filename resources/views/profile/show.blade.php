@@ -55,6 +55,12 @@
                 </div>
             @endif --}}
 
+            {{-- Statistics component --}}
+            <x-statistics-books
+                :read="$read"
+                :want-to-read="$wantToRead"
+                :reading="$reading"
+            />
         </div>
     </div>
 </x-app-layout>

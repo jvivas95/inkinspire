@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\ReadingList;
 use App\Models\Review;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\RedirectResponse;
@@ -93,9 +94,18 @@ class ProfileController extends Controller
         $publicUser = User::where('username', $userName)->firstOrFail();
         $reviewsGuestUser = Review::where('user_id', $publicUser->id)->get();
 
+        $publicUserReadingList = ReadingList::where('user_id', $publicUser->id)->get();
+
+        $publicUserWantToRead = $publicUserReadingList->where('status', 'want_to_read')->take(5);
+        $publicUserReading = $publicUserReadingList->where('status', 'reading')->take(5);
+        $publicUserRead = $publicUserReadingList->where('status', 'read')->take(5);
+
         return view('profile.show', [
             'publicUser' => $publicUser,
-            'reviewsGuestUser' => $reviewsGuestUser
+            'reviewsGuestUser' => $reviewsGuestUser,
+            'wantToRead' => $publicUserWantToRead,
+            'reading' => $publicUserReading,
+            'read' => $publicUserRead
         ]);
     }
 }
