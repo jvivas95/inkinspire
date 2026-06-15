@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div class="mt-6">
+        <div class="container mx-auto px-4 py-6 space-y-6">
             {{-- @php
                 $books = $publicUser->books ?? collect();
             @endphp
@@ -61,6 +61,17 @@
                 :want-to-read="$wantToRead"
                 :reading="$reading"
             />
+
+            {{-- Statistics cards --}}
+            <x-statistics-books-cards
+                :read="$read"
+                :want-to-read="$wantToRead"
+                :reading="$reading"
+            />
+
+            {{-- Favorite Books container --}}
+            <x-favorite-books :favorite-books="$favoriteBooks" />
+
         </div>
     </div>
 </x-app-layout>

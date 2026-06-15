@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\User;
-use App\Models\Reviews;
+use App\Models\BookFavorite;
 
 
 class ProfileController extends Controller
@@ -100,12 +100,16 @@ class ProfileController extends Controller
         $publicUserReading = $publicUserReadingList->where('status', 'reading')->take(5);
         $publicUserRead = $publicUserReadingList->where('status', 'read')->take(5);
 
+        $publicUserFavoriteBooks = BookFavorite::where('user_id', $publicUser->id)->with('book')->get();
+
+
         return view('profile.show', [
             'publicUser' => $publicUser,
             'reviewsGuestUser' => $reviewsGuestUser,
             'wantToRead' => $publicUserWantToRead,
             'reading' => $publicUserReading,
-            'read' => $publicUserRead
+            'read' => $publicUserRead,
+            'favoriteBooks' => $publicUserFavoriteBooks
         ]);
     }
 }
