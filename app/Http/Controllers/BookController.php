@@ -25,15 +25,49 @@ class BookController extends Controller
     {
         //
 
-        if ($request->filled('q')){
-            $value = $request->input('q');
-            $books = $this->googleBooks->search($value);
+        $isGoogleSearch = $request->input('tab') === 'search'
+            && ($request->filled('q') || $request->filled('author'));
+
+        if ($isGoogleSearch) {
+            $value = trim((string) $request->input('q'));
+            $author = trim((string) $request->input('author'));
+            $books = $this->googleBooks->search($value, $author);
+
+            $books = collect($books)
+                ->when($request->filled('year_from'), function ($collection) use ($request) {
+                    return $collection->filter(fn($book) => (int) ($book['published_year'] ?? 0) >= (int) $request->input('year_from'));
+                })
+                ->when($request->filled('year_to'), function ($collection) use ($request) {
+                    return $collection->filter(fn($book) => (int) ($book['published_year'] ?? 0) <= (int) $request->input('year_to'));
+                })
+                ->values()
+                ->all();
         }
         else {
             $query = Book::query();
 
-            if ($request->input('genre')) {
+            if ($request->filled('author')) {
+                $query->where('author', 'like', '%' . $request->input('author') . '%');
+            }
+
+            if ($request->filled('title')) {
+                $query->where('title', 'like', '%' . $request->input('title') . '%');
+            }
+
+            if ($request->filled('genre')) {
                 $query->where('genre', $request->input('genre'));
+            }
+
+            if ($request->filled('year_from')) {
+                $query->where('published_year', '>=', $request->input('year_from'));
+            }
+
+            if ($request->filled('year_to')) {
+                $query->where('published_year', '<=', $request->input('year_to'));
+            }
+
+            if ($request->filled('min_rating')) {
+                $query->where('average_rating', '>=', $request->input('min_rating'));
             }
 
             switch ($request->input('sort')) {
