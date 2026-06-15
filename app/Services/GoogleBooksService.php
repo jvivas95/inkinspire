@@ -9,11 +9,18 @@ use Exception;
 
 class GoogleBooksService
 {
-    public function search($query)
+    public function search($query, ?string $author = null)
     {
+        $searchQuery = trim((string) $query);
+
+        if (! empty($author)) {
+            $authorQuery = trim((string) $author);
+            $searchQuery = ($searchQuery !== '' ? 'intitle:' . $searchQuery : '') . ($authorQuery !== '' ? ' inauthor:' . $authorQuery : '');
+        }
+
         // Make a request to the Google Books API
         $response = Http::get('https://www.googleapis.com/books/v1/volumes', [
-            'q' => $query,
+            'q' => $searchQuery !== '' ? $searchQuery : 'books',
             'key' => config('services.google_books.key'),
             'maxResults' => 10
         ]);
