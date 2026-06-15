@@ -6,7 +6,7 @@
     <div class="max-w-4xl mx-auto py-8">
         <div class="bg-white rounded-lg shadow p-6">
             <div class="flex items-center space-x-6">
-                <img src="{{ Storage::url($publicUser->avatar ?? 'images/default-avatar.png') }}" alt="{{ $publicUser->name }}'s Profile Picture" class="w-36 h-36 rounded-full object-cover">
+                <img src="{{ Storage::url($publicUser->avatar ?? 'images/default-avatar.png') }}" alt="{{ $publicUser->name }}'s Profile Picture" class="w-24 h-24 sm:w-36 sm:h-36 rounded-full object-cover">
 
                 <div class="flex-1">
                     <div class="flex items-center space-x-4">
