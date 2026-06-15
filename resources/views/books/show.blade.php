@@ -123,7 +123,9 @@
             </div>
             @if ($userReview)
             <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                <p class="font-semibold">{{ $userReview->user->name }} - {{ $userReview->user->username }}</p>
+                <a href="{{ route('profile.show', $userReview->user->username) }}" class="font-semibold">
+                    {{ $userReview->user->name }} - {{ $userReview->user->username }}
+                </a>
                 <p class="text-sm text-gray-600">Publicado: {{ $userReview->updated_at->diffForHumans(['short' => true]) }}</p>
                 <p class="mt-2 text-black">{{ data_get($userReview, 'body') }}</p>
                 <div class="flex gap-2 mt-4 justify-between">
@@ -176,7 +178,9 @@
                     <p class="text-[#064E3B]">Reseñas de otros usuarios</p>
                 </div>
                 <div class="bg-gray-100 p-4 rounded-lg mb-4 flex flex-col">
-                    <p class="font-semibold">{{ $review->user->name }} - {{ $review->user->username }}</p>
+                    <a href="{{ route('profile.show', $review->user->username) }}" class="font-semibold">
+                        {{ $review->user->name }} - {{ $review->user->username }}
+                    </a>
                     <p class="text-sm text-gray-600">Publicado: {{ $review->updated_at->diffForHumans(['short' => true]) }}</p>
                     <p class="mt-2 text-black">{{ data_get($review, 'body') }}</p>
                     <div class="flex justify-end mt-4">
