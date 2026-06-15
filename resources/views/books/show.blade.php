@@ -123,9 +123,9 @@
             </div>
             @if ($userReview)
             <div class="bg-gray-100 p-4 rounded-lg mb-4">
-                <a href="{{ route('profile.show', $userReview->user->username) }}" class="font-semibold">
+                <div class="font-semibold">
                     {{ $userReview->user->name }} - {{ $userReview->user->username }}
-                </a>
+                </div>
                 <p class="text-sm text-gray-600">Publicado: {{ $userReview->updated_at->diffForHumans(['short' => true]) }}</p>
                 <p class="mt-2 text-black">{{ data_get($userReview, 'body') }}</p>
                 <div class="flex gap-2 mt-4 justify-between">

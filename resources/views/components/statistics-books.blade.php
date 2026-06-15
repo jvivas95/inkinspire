@@ -9,16 +9,16 @@
     </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-center">
         <div class="bg-gray-100 p-4 rounded-lg">
-            <p class="truncate text-sm md:text-base">Leídos</p>
-            <p class="text-lg font-semibold">{{ $read->count() }}</p>
+            <p class="truncate text-sm md:text-base">En Lectura</p>
+            <p class="text-lg font-semibold">{{ $reading->count() }}</p>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg">
             <p class="truncate text-sm md:text-base">Quiero Leer</p>
             <p class="text-lg font-semibold">{{ $wantToRead->count() }}</p>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg">
-            <p class="truncate text-sm md:text-base">En Lectura</p>
-            <p class="text-lg font-semibold">{{ $reading->count() }}</p>
+            <p class="truncate text-sm md:text-base">Leídos</p>
+            <p class="text-lg font-semibold">{{ $read->count() }}</p>
         </div>
     </div>
 </div>
