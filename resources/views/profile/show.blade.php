@@ -16,7 +16,13 @@
                             <a href="{{ url('/profile/edit') }}" class="px-4 py-1 border rounded text-sm">Editar perfil</a>
                         @else
 
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded text-sm">Seguir</button>
+                            <form method="POST" action="{{ route('users.follow', $publicUser) }}">
+                            @csrf
+                            <button type="submit"
+                                class="px-4 py-1 rounded text-sm transition-colors duration-200 {{ $isFollowing ? 'bg-[#dc2626] text-white hover:bg-[#b91c1c]' : 'bg-[#064E3B] text-white hover:bg-[#052e20]' }}">
+                                {{ $isFollowing ? 'Dejar de seguir' : 'Seguir' }}
+                            </button>
+                        </form>
                         @endif
                     </div>
 

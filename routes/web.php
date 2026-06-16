@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReadingListController;
 use App\Http\Controllers\ReviewController;
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('reviews/{review}/like', [ReviewLikeController::class, 'store'])->name('reviews.like');
     Route::post('books/{book}/favorite', [BookFavoriteController::class, 'store'])->name('books.favorite');
     Route::get('/users/{username}', [ProfileController::class, 'show'])->name('profile.show');
+    Route::post('/users/{user}/follow', [FollowController::class, 'store'])->name('users.follow');
 });
 
 
