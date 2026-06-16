@@ -102,6 +102,7 @@ class ProfileController extends Controller
 
         $publicUserFavoriteBooks = BookFavorite::where('user_id', $publicUser->id)->with('book')->get();
 
+        $isFollowing = Auth::user()->following()->where('following_id', $publicUser->id)->exists();
 
         return view('profile.show', [
             'publicUser' => $publicUser,
@@ -109,7 +110,8 @@ class ProfileController extends Controller
             'wantToRead' => $publicUserWantToRead,
             'reading' => $publicUserReading,
             'read' => $publicUserRead,
-            'favoriteBooks' => $publicUserFavoriteBooks
+            'favoriteBooks' => $publicUserFavoriteBooks,
+            'isFollowing' => $isFollowing
         ]);
     }
 }
