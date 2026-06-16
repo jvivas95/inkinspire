@@ -1,58 +1,257 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# InkInspire 📚
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**A community platform for book lovers — Una comunidad para amantes de los libros**
 
-## About Laravel
+[🌐 Live Demo](https://inkinspire.es) · [💻 GitHub](https://github.com/jvivas95/inkinspire)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🇬🇧 English
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### About the Project
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+InkInspire is a community-driven book review platform where readers can discover books, share their thoughts, and track their reading journey. Built with Laravel 13 and integrated with the Google Books API, it offers a complete social reading experience.
 
-## Learning Laravel
+### ✨ Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Book Discovery** — Search millions of books powered by Google Books API with advanced filters (title, author, year range)
+- **Reviews & Ratings** — Write reviews and rate books with a 1-5 star system
+- **Reading Lists** — Organize books into "Want to Read", "Reading" and "Read" lists
+- **Favorites** — Save your favorite books with an interactive carousel on the dashboard
+- **Likes** — Like other users' reviews
+- **Dashboard** — Personal stats, reading progress and top-rated books at a glance
+- **Community** — See the latest reviews and recent activity from other readers
+- **Authentication** — Full auth system with registration, login and profile management
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🛠️ Tech Stack
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+| Technology | Purpose |
+|---|---|
+| Laravel 13 | Backend framework |
+| PHP 8.3 | Server-side language |
+| MySQL (Aiven) | Production database |
+| Tailwind CSS | Styling |
+| Alpine.js | Reactive UI components |
+| Vite | Asset bundling |
+| Docker | Containerization |
+| Render | Cloud deployment |
+| Google Books API | Book data source |
+| Pest | Testing framework |
 
-## Agentic Development
+### 🏗️ Architecture Highlights
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- **Observer Pattern** — `ReviewObserver` automatically recalculates book ratings on every review change
+- **Policies** — Laravel Policies enforce authorization rules (only authors can edit/delete their reviews)
+- **Form Requests** — Dedicated request classes for all form validations
+- **Service Layer** — `GoogleBooksService` encapsulates all external API communication
+- **Eager Loading** — N+1 queries prevented throughout the application
+
+### 🚀 Local Installation
+
+**Requirements:** PHP 8.3+, Composer, Node.js 20+, MySQL
 
 ```bash
-composer require laravel/boost --dev
+# 1. Clone the repository
+git clone https://github.com/jvivas95/inkinspire.git
+cd inkinspire
 
-php artisan boost:install
+# 2. Install PHP dependencies
+composer install
+
+# 3. Install Node dependencies
+npm install
+
+# 4. Configure environment
+cp .env.example .env
+php artisan key:generate
+
+# 5. Configure your .env file
+# Set DB_*, APP_URL and GOOGLE_BOOKS_API_KEY
+
+# 6. Run migrations and seeders
+php artisan migrate:fresh --seed
+
+# 7. Create storage symlink
+php artisan storage:link
+
+# 8. Compile assets and start server
+npm run dev
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### ⚙️ Environment Variables
 
-## Contributing
+```env
+APP_NAME=InkInspire
+APP_ENV=local
+APP_URL=http://localhost:8000
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=inkinspire
+DB_USERNAME=root
+DB_PASSWORD=
 
-## Code of Conduct
+GOOGLE_BOOKS_API_KEY=your_api_key_here
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Get your Google Books API key at [console.cloud.google.com](https://console.cloud.google.com)
 
-## Security Vulnerabilities
+### 🧪 Running Tests
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan test
+```
 
-## License
+### 📁 Project Structure
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+app/
+├── Http/
+│   ├── Controllers/     # BookController, ReviewController, etc.
+│   └── Requests/        # Form validation classes
+├── Models/              # Eloquent models with relationships
+├── Observers/           # ReviewObserver for automatic rating updates
+├── Policies/            # Authorization rules
+└── Services/            # GoogleBooksService
+database/
+├── migrations/          # Database schema
+├── factories/           # Test data factories
+└── seeders/             # Database seeders
+resources/
+└── views/
+    ├── books/           # Book catalog and detail views
+    ├── dashboard/       # User dashboard
+    └── layouts/         # App and home layouts
+```
+
+### 🗺️ Roadmap
+
+- [✅] Public user profiles (`/users/{username}`)
+- [ ] Follow system between users
+- [ ] Public REST API with Sanctum
+- [ ] Redis caching for top-rated books
+- [ ] Email notifications for likes and comments
+- [ ] Comments on reviews
+
+### 👨‍💻 Author
+
+**Jefferson Vivas Vásquez**
+
+LinkedIn: https://linkedin.com/in/jefferson-vivas-vasquez
+Portfolio: https://jvivas.es
+
+---
+
+## 🇪🇸 Español
+
+### Sobre el Proyecto
+
+InkInspire es una plataforma de reseñas de libros impulsada por la comunidad donde los lectores pueden descubrir libros, compartir sus opiniones y hacer seguimiento de su progreso lector. Construida con Laravel 13 e integrada con la API de Google Books, ofrece una experiencia social de lectura completa.
+
+### ✨ Funcionalidades
+
+- **Descubrimiento de libros** — Busca millones de libros con la API de Google Books con filtros avanzados (título, autor, rango de años)
+- **Reseñas y puntuaciones** — Escribe reseñas y puntúa libros con un sistema de 1 a 5 estrellas
+- **Listas de lectura** — Organiza tus libros en "Quiero leer", "Leyendo" y "Leído"
+- **Favoritos** — Guarda tus libros favoritos con un carrusel interactivo en el dashboard
+- **Likes** — Da like a las reseñas de otros usuarios
+- **Dashboard** — Estadísticas personales, progreso lector y libros mejor valorados de un vistazo
+- **Comunidad** — Ve las últimas reseñas y actividad reciente de otros lectores
+- **Autenticación** — Sistema completo con registro, login y gestión de perfil
+
+### 🛠️ Stack Tecnológico
+
+| Tecnología | Uso |
+|---|---|
+| Laravel 13 | Framework backend |
+| PHP 8.3 | Lenguaje servidor |
+| MySQL (Aiven) | Base de datos en producción |
+| Tailwind CSS | Estilos |
+| Alpine.js | Componentes reactivos |
+| Vite | Compilación de assets |
+| Docker | Contenerización |
+| Render | Despliegue en la nube |
+| Google Books API | Fuente de datos de libros |
+| Pest | Framework de testing |
+
+### 🏗️ Decisiones de Arquitectura
+
+- **Observer Pattern** — `ReviewObserver` recalcula automáticamente la puntuación media del libro en cada cambio de reseña
+- **Policies** — Las Policies de Laravel controlan las reglas de autorización (solo los autores pueden editar/eliminar sus reseñas)
+- **Form Requests** — Clases de request dedicadas para todas las validaciones de formularios
+- **Capa de Servicios** — `GoogleBooksService` encapsula toda la comunicación con la API externa
+- **Eager Loading** — Las consultas N+1 están prevenidas en toda la aplicación
+
+### 🚀 Instalación Local
+
+**Requisitos:** PHP 8.3+, Composer, Node.js 20+, MySQL
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/jvivas95/inkinspire.git
+cd inkinspire
+
+# 2. Instalar dependencias PHP
+composer install
+
+# 3. Instalar dependencias Node
+npm install
+
+# 4. Configurar entorno
+cp .env.example .env
+php artisan key:generate
+
+# 5. Configurar el archivo .env
+# Configura DB_*, APP_URL y GOOGLE_BOOKS_API_KEY
+
+# 6. Ejecutar migraciones y seeders
+php artisan migrate:fresh --seed
+
+# 7. Crear enlace de storage
+php artisan storage:link
+
+# 8. Compilar assets e iniciar servidor
+npm run dev
+php artisan serve
+```
+
+### ⚙️ Variables de Entorno
+
+```env
+APP_NAME=InkInspire
+APP_ENV=local
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=inkinspire
+DB_USERNAME=root
+DB_PASSWORD=
+
+GOOGLE_BOOKS_API_KEY=tu_clave_aqui
+```
+
+Obtén tu clave de Google Books API en [console.cloud.google.com](https://console.cloud.google.com)
+
+### 🧪 Ejecutar Tests
+
+```bash
+php artisan test
+```
+
+### 🗺️ Próximas Funcionalidades
+
+- [✅] Perfiles públicos de usuario (`/users/{username}`)
+- [ ] Sistema de seguimiento entre usuarios
+- [ ] API REST pública con Sanctum
+- [ ] Caché con Redis para libros mejor valorados
+- [ ] Notificaciones por email para likes y comentarios
+- [ ] Comentarios en reseñas
+
+### 👨‍💻 Autor
+
+**Jefferson Vivas Vásquez**
+
+LinkedIn: https://linkedin.com/in/jefferson-vivas-vasquez
+Portfolio: https://jvivas.es
