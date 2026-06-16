@@ -6,11 +6,13 @@
     {{-- Principal container --}}
     <div class="container mx-auto px-4 py-6 space-y-6">
 
-        {{-- Statistics component --}}
-        <x-statistics-books
-            :read="$read"
-            :want-to-read="$wantToRead"
-            :reading="$reading"
+        {{-- Profile --}}
+        <x-profile-header
+            :user="Auth::user()"
+            :is-owner="true"
+            :read-count="$read->count()"
+            :reading-count="$reading->count()"
+            :want-to-read-count="$wantToRead->count()"
         />
 
         {{-- Statistics cards --}}

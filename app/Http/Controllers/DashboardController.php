@@ -32,6 +32,9 @@ class DashboardController extends Controller
 
         $favoriteBooks = BookFavorite::where('user_id', Auth::id())->with('book')->get();
 
+        $isFollowing = false;
+        $isFavorite = false;
+
         return view('dashboard', compact('userReadingList', 'wantToRead', 'reading', 'read', 'latestReviews', 'topRatedBooks', 'favoriteBooks'));
     }
 }
