@@ -65,15 +65,11 @@
             <x-input-label for="avatar" :value="__('Foto de Perfil')" />
 
             {{-- Mostrar avatar actual si existe --}}
-            @if ($user->avatar)
-                <div class="mb-4">
-                    <img src="{{ Storage::url($user->avatar) }}" alt="Avatar" class="w-20 h-20 rounded-full mb-2">
-                </div>
-            @else
-                <div class="w-20 h-20 rounded-full bg-gray-200 mb-2 flex items-center justify-center">
-                    <span class="text-gray-500 text-xl">{{ substr($user->name, 0, 1) }}</span>
-                </div>
-            @endif
+            <img src="{{ Auth::user()->avatar ? Storage::url(Auth::user()->avatar) : asset('images/default_avatar.png') }}"
+                    alt="{{ Auth::user()->name }}"
+                    class="w-20 h-20 rounded-full mb-2"
+                    onerror="if (this.src != '{{ asset('images/default_avatar.png') }}') { this.src = '{{ asset('images/default_avatar.png') }}'; }"
+                >
 
             {{-- Input para subir nueva foto de perfil --}}
             <input type="file" name="avatar" id="avatar" accept="image/*">

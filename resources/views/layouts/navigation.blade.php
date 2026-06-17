@@ -26,7 +26,11 @@
             <!-- Settings Dropdown -->
             @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <img src="{{ Storage::url(Auth::user()->avatar) }}" alt="Avatar" class="w-10 h-10 rounded-full mb-2">
+                <img src="{{ Auth::user()->avatar ? Storage::url(Auth::user()->avatar) : asset('images/default_avatar.png') }}"
+                    alt="{{ Auth::user()->name }}"
+                    class="w-10 h-10 rounded-full mb-2"
+                    onerror="if (this.src != '{{ asset('images/default_avatar.png') }}') { this.src = '{{ asset('images/default_avatar.png') }}'; }"
+                >
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-emerald-800 focus:outline-none transition ease-in-out duration-150">

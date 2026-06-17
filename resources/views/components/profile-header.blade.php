@@ -3,9 +3,11 @@
 
         {{-- Avatar --}}
         <div class="flex-shrink-0">
-            <img src="{{ Storage::url($user->avatar ?? 'images/default-avatar.png') }}"
-                 alt="{{ $user->name }}"
-                 class="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-[#064E3B]">
+            <img src="{{ $user->avatar ? Storage::url($user->avatar) : asset('images/default_avatar.png') }}"
+                alt="{{ $user->name }}"
+                class="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-[#064E3B]"
+                onerror="if (this.src != '{{ asset('images/default_avatar.png') }}') { this.src = '{{ asset('images/default_avatar.png') }}'; }"
+                >
         </div>
 
         {{-- Info --}}
