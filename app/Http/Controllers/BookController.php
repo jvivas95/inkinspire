@@ -139,6 +139,14 @@ class BookController extends Controller
         $userReadingList = optional(Auth::user())->readingLists()->where('book_id', $id)->first();
         $reviews = $book->reviews()->with(['user', 'likes'])->latest()->paginate(10);
         $isFavorite = optional(Auth::user())->bookFavorites()->where('book_id', $book->id)->exists();
+        $sort = request()->input('sort', 'likes');
+        $reviews = $book->reviews()
+            ->with(['user', 'likes'])
+            ->withCount('likes')
+            ->orderByDesc('likes_count')
+            ->orderByDesc('created_at')
+            ->paginate(5);
+
         return view('books.show', compact('book', 'userReview', 'userReadingList', 'reviews', 'isFavorite'));
     }
 

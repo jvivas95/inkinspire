@@ -12,7 +12,10 @@
             <div class="flex flex-col md:flex-row gap-6">
                 {{-- Left Column: Cover and Actions --}}
                 <div class="w-full md:w-1/3 flex flex-col items-center">
-                    <img src="{{ data_get($book, 'cover_image') }}" alt="{{ data_get($book, 'title') }} cover" class="w-48 h-auto mb-4 shadow-md rounded">
+                    <img src="{{ data_get($book, 'cover_image') ?? asset('images/default-book.png') }}"
+                        alt="{{ data_get($book, 'title') }} cover" class="w-48 h-auto mb-4 shadow-md rounded"
+                        onerror="if (this.src != '{{ asset('images/default-book.png') }}') { this.src = '{{ asset('images/default-book.png') }}'; }"
+                        >
                     <h2 class="text-2xl font-bold text-center mb-4">{{ data_get($book, 'title') }}</h2>
                     <form method="POST" action="{{ route('reading-list.store') }}" class="flex flex-col gap-2 w-full">
                         @csrf
@@ -169,14 +172,30 @@
             </form>
             @endif
         </div>
-        @foreach ($reviews as $review)
-            @if($review->id == $userReview?->id)
-                @continue
-            @endif
-            <div class="bg-white shadow-md rounded-lg p-6">
-                <div class="mb-4 border-b pb-2 text-xl font-semibold text-center">
-                    <p class="text-[#064E3B]">Reseñas de otros usuarios</p>
-                </div>
+
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-bold text-[#064E3B]">
+                Reseñas ({{ $reviews->total() }})
+            </h3>
+            <div class="flex gap-2">
+                <a href="{{ request()->fullUrlWithQuery(['sort' => 'likes']) }}"
+                class="{{ request('sort') === 'likes' ? 'bg-[#064E3B] text-white' : 'bg-gray-100 text-gray-600' }} px-3 py-1 rounded-lg text-xs font-medium transition">
+                    ♥ Más likes
+                </a>
+                <a href="{{ request()->fullUrlWithQuery(['sort' => 'recent']) }}"
+                class="{{ request('sort', 'likes') === 'recent' ? 'bg-[#064E3B] text-white' : 'bg-gray-100 text-gray-600' }} px-3 py-1 rounded-lg text-xs font-medium transition">
+                    🕐 Más recientes
+                </a>
+            </div>
+        </div>
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <div class="mb-4 border-b pb-2 text-xl font-semibold text-center">
+                <p class="text-[#064E3B]">Reseñas de otros usuarios</p>
+            </div>
+            @foreach ($reviews as $review)
+                @if($review->id == $userReview?->id)
+                    @continue
+                @endif
                 <div class="bg-gray-100 p-4 rounded-lg mb-4 flex flex-col">
                     <a href="{{ route('profile.show', $review->user->username) }}" class="font-semibold">
                         {{ $review->user->name }} - {{ $review->user->username }}
@@ -196,8 +215,13 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
-        @endforeach
+        @if ($reviews->hasPages())
+            <div class="mt-6">
+                {{ $reviews->links() }}
+            </div>
+        @endif
 
         {{-- Edit Review Modal --}}
         @if ($userReview)
