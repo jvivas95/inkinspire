@@ -4,6 +4,14 @@
 
 
 /* Star Rating */
+.font-playfair {
+    font-family: 'Playfair Display', serif;
+}
+
+.font-inter {
+    font-family: 'Inter', sans-serif;
+}
+
 .star-rating {
     display: flex;
     flex-direction: row-reverse;

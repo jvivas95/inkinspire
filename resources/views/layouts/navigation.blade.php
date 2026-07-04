@@ -19,6 +19,9 @@
                     <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.index')">
                         {{ __('Libros') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                        Explorar
+                    </x-nav-link>
                     @endauth
                 </div>
             </div>

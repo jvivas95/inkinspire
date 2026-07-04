@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReviewLikeController;
 use App\Http\Controllers\BookFavoriteController;
+use App\Http\Controllers\userController;
 use App\Models\ReadingList;
 use App\Models\Review;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::post('books/{book}/favorite', [BookFavoriteController::class, 'store'])->name('books.favorite');
     Route::get('/users/{username}', [ProfileController::class, 'show'])->name('profile.show');
     Route::post('/users/{user}/follow', [FollowController::class, 'store'])->name('users.follow');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });
 
 
