@@ -9,7 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReviewLikeController;
 use App\Http\Controllers\BookFavoriteController;
-use App\Http\Controllers\userController;
+use App\Http\Controllers\UserController;
 use App\Models\ReadingList;
 use App\Models\Review;
 use Illuminate\Support\Facades\Route;
