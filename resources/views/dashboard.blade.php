@@ -4,7 +4,7 @@
     </x-slot>
 
     {{-- Principal container --}}
-    <div class="container mx-auto px-4 py-6 space-y-6">
+    <div class="max-w-4xl mx-auto py-8">
 
         {{-- Profile --}}
         <x-profile-header
