@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\UserFollowed;
 
 
 class FollowController extends Controller
@@ -22,6 +23,9 @@ class FollowController extends Controller
         }
         else {
             Auth::user()->following()->attach($user->id);
+
+            // Notify the followed user about the new follower
+            $user->notify(new UserFollowed(Auth::user()));
         }
 
         return redirect()->back();
