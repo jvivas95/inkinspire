@@ -13,7 +13,7 @@
         {{-- Info --}}
         <div class="flex-1 text-center sm:text-left">
             <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-3">
-                <h2 class="text-2xl font-bold text-[#064E3B]">{{ $user->username }}</h2>
+                <h2 class="text-4xl font-bold text-[#064E3B]">{{ $user->username }}</h2>
 
                 @if($isOwner)
                     <a href="{{ route('profile.edit') }}"
@@ -32,25 +32,25 @@
             </div>
 
             {{-- Seguidores --}}
-            <div class="flex justify-center sm:justify-start gap-6 text-sm mb-4">
-                <div class="text-center">
-                    <span class="font-bold text-[#064E3B] text-lg">{{ $user->followers->count() }}</span>
-                    <p class="text-[#64748B]">seguidores</p>
+            <div class="flex flex-wrap justify-center sm:justify-start items-center gap-4 sm:gap-7 text-base mb-4 w-full">
+                <div class="flex items-center justify-center sm:justify-start gap-2 min-w-[110px]">
+                    <span class="font-bold text-[#064E3B] text-xl">{{ $user->followers->count() }}</span>
+                    <p class="text-[#64748B] font-medium">seguidores</p>
                 </div>
-                <div class="text-center">
-                    <span class="font-bold text-[#064E3B] text-lg">{{ $user->following->count() }}</span>
-                    <p class="text-[#64748B]">seguidos</p>
+                <div class="flex items-center justify-center sm:justify-start gap-2 min-w-[110px]">
+                    <span class="font-bold text-[#064E3B] text-xl">{{ $user->following->count() }}</span>
+                    <p class="text-[#64748B] font-medium">seguidos</p>
                 </div>
-                <div class="text-center">
-                    <span class="font-bold text-[#064E3B] text-lg">{{ $user->reviews->count() }}</span>
-                    <p class="text-[#64748B]">reseñas</p>
+                <div class="flex items-center justify-center sm:justify-start gap-2 min-w-[110px]">
+                    <span class="font-bold text-[#064E3B] text-xl">{{ $user->reviews->count() }}</span>
+                    <p class="text-[#64748B] font-medium">reseñas</p>
                 </div>
             </div>
 
             {{-- Nombre y bio --}}
-            <p class="font-semibold text-[#064E3B]">{{ $user->name }}</p>
+            <p class="font-semibold text-[#064E3B] text-xl">{{ $user->name }}</p>
             @if($user->bio)
-                <p class="text-sm text-[#64748B] mt-1">{{ $user->bio }}</p>
+                <p class="text-base text-[#64748B] mt-1">{{ $user->bio }}</p>
             @endif
         </div>
     </div>
