@@ -12,17 +12,17 @@
                     <p class="text-xs font-semibold tracking-widest uppercase mb-4 text-white">Comunidad</p>
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('register') }}" class="hover:text-white transition">Únete</a></li>
-                        <li><a href="#resenas" class="hover:text-white transition">Reseñas</a></li>
-                        <li><a href="#libros" class="hover:text-white transition">Explorar libros</a></li>
+                        <li><a href="{{ route('home') }}#resenas" class="hover:text-white transition">Reseñas</a></li>
+                        <li><a href="{{ route('home') }}#libros" class="hover:text-white transition">Explorar libros</a></li>
                     </ul>
                 </div>
             @endguest
             <div>
                 <p class="text-xs font-semibold tracking-widest uppercase mb-4 text-white">Soporte</p>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-white transition">Centro de Ayuda</a></li>
-                    <li><a href="#" class="hover:text-white transition">Contacto</a></li>
-                    <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+                    <li><a href="{{ route('help')}}" class="hover:text-white transition">Centro de Ayuda</a></li>
+                    <li><a href="{{ route('contact')}}" class="hover:text-white transition">Contacto</a></li>
+                    <li><a href="{{ route('faq')}}" class="hover:text-white transition">FAQ</a></li>
                 </ul>
             </div>
             <div>
