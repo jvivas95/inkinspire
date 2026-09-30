@@ -41,9 +41,7 @@
             </main>
 
             <!-- Footer -->
-            <footer class="mt-16 border-t border-[#064E3B] border-opacity-20 py-8 text-center text-[#64748B] text-sm font-inter">
-                © {{ date('Y') }} InkInspire — Book Reviews & Community
-            </footer>
+            @include('layouts.navbar')
         </div>
     </body>
 </html>

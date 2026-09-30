@@ -21,7 +21,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/keep-alive', function () {
     return 'I\'m alive!';
-});
+    });
+
+Route::view('/terms', 'legal.terms')->name('terms');
+Route::view('/privacy', 'legal.privacy')->name('privacy');
+Route::view('/cookies', 'legal.cookies')->name('cookies');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
