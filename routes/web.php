@@ -23,9 +23,15 @@ Route::get('/keep-alive', function () {
     return 'I\'m alive!';
     });
 
+// Legal pages
 Route::view('/terms', 'legal.terms')->name('terms');
 Route::view('/privacy', 'legal.privacy')->name('privacy');
 Route::view('/cookies', 'legal.cookies')->name('cookies');
+
+// Support pages
+Route::view('/help', 'support.help')->name('help');
+Route::view('/contact', 'support.contact')->name('contact');
+Route::view('/faq', 'support.faq')->name('faq');
 
 
 Route::middleware('auth')->group(function () {
