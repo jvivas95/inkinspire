@@ -11,6 +11,7 @@ use App\Http\Controllers\ReviewLikeController;
 use App\Http\Controllers\BookFavoriteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ContactController;
 use App\Models\ReadingList;
 use App\Models\Review;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::view('/cookies', 'legal.cookies')->name('cookies');
 // Support pages
 Route::view('/help', 'support.help')->name('help');
 Route::view('/contact', 'support.contact')->name('contact');
+Route::post('/contact', ContactController::class)->middleware('throttle:5,1')->name('contact.send');
 Route::view('/faq', 'support.faq')->name('faq');
 
 

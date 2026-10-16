@@ -21,7 +21,7 @@
                 <p class="text-xs font-semibold tracking-widest uppercase mb-4 text-white">Soporte</p>
                 <ul class="space-y-2 text-sm">
                     <li><a href="{{ route('help')}}" class="hover:text-white transition">Centro de Ayuda</a></li>
-                    <li><a href="{{ route('contact')}}" class="hover:text-white transition">Contacto</a></li>
+                    {{-- <li><a href="{{ route('contact')}}" class="hover:text-white transition">Contacto</a></li> --}}
                     <li><a href="{{ route('faq')}}" class="hover:text-white transition">FAQ</a></li>
                 </ul>
             </div>
